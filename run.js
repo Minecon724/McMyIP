@@ -90,11 +90,11 @@ function beforeLogin(client) {
     org = (org != undefined ? org : provider)
     const proxy = response['proxy'];
     const type = response['type'];
-    const proxyColor = (proxy == "yes" ? proxyColor : notProxyColor);
+    const proxyColorStr = (proxy == "yes" ? proxyColor : notProxyColor);
     client.end('info',
       details.replace("%ip%", ip).replace("%country%", country).replace("%continent%", continent).replace("%city%", city).replace("%region%", region)
       .replace("%asn%", asn).replace("%provider%", provider).replace("%org%", org)
-      .replace("%proxy%", proxy).replace("%type%", type).replace("%proxyColor%", proxyColor)
+      .replace("%proxy%", proxy).replace("%type%", type).replace("%proxyColor%", proxyColorStr)
     );
   });
 }
