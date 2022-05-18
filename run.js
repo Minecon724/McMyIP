@@ -12,6 +12,8 @@ var host = process.env["SERVER_HOST"];
 host = (host == undefined ? '0.0.0.0' : host)
 var port = process.env["SERVER_PORT"];
 port = (port == undefined ? '25565' : port)
+var debug = process.env["DEBUG"];
+debug = (debug == 'true' ? true : false)
 
 console.log(`Starting server on ${host}:${port}`);
 
@@ -24,6 +26,8 @@ var server = mc.createServer({
   beforePing: beforePing,
   beforeLogin: beforeLogin
 });
+
+if (debug) console.log(process.env);
 
 function beforePing(resp, client) {
   console.log(client.socket)
@@ -53,6 +57,7 @@ function beforeLogin(client) {
   var ip = client.socket.remoteAddress;
   var url = pcEndpoint + ip + pcArgs;
   tiny.get({url}, function _get(err, result) {
+    if (debug) console.log(result.body);
     var status = result.body["status"];
     if (status == "denied" || status == "error") {
       console.log('API returned an error: ');
@@ -69,8 +74,6 @@ function beforeLogin(client) {
     region = (region != null ? region : "Unknown")
     var city = response['city'];
     city = (city != null ? city : "Unknown")
-    var asn = response['asn'];
-    var provider = response['provider'];
     var organisation = response['organisation'];
     var type = response['type'];
     var proxy = response['proxy'];
