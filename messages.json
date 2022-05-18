@@ -1,0 +1,23 @@
+{
+  "c11": "Available placeholders:",
+  "c12": "Clear IP: ip0-3",
+  "c13": "Obfuscated IP: oip0-3",
+  "c14": "Note: if there are multiple placeholders with the same name, only the first one will be parsed", 
+  "motd": {
+    "text": "Your IP: ",
+    "color": "aqua",
+    "extra": [
+      { "text": "%ip0%.%ip1%.", "bold": true },
+      { "text": "%oip2%", "bold": true, "obfuscated": true },
+      { "text": ".", "bold": true },
+      { "text": "%oip3%", "bold": true, "obfuscated": true },
+      { "text": "\nJoin for detailed info", "color": "gold" }
+    ]
+  },
+  "c21": "Available placeholders:",
+  "c22": "ip, country, continent, city, region, asn, provider, org, proxy, type, proxyColor",
+  "c23": "Note: if there are multiple placeholders with the same name, only the first one will be parsed", 
+  "details": {"text":"Details for ","color":"green","extra": [{"text":"%ip%\n\n","bold":true,"color":"gold"},{"text":"----","strikethrough":true,"color":"aqua"},{"text":" GEO ","bold":true,"color":"aqua"},{"text":"----","strikethrough":true,"color":"aqua"},{"text":"\nCountry: ","color":"aqua"},{"text":"%country%","bold":true,"color":"yellow"},{"text":", ","color":"yellow"},{"text":"%continent%","color":"light_purple"},{"text":"\n"},{"text":"City: ","color":"aqua"},{"text":"%city%","bold":true,"color":"yellow"},{"text":", ","color":"yellow"},{"text":"%region%","color":"light_purple"},{"text":"\n\n"},{"text":"----","strikethrough":true,"color":"aqua"},{"text":" ISP ","bold":true,"color":"aqua"},{"text":"----","strikethrough":true,"color":"aqua"},{"text":"\n%asn%","bold":true,"color":"yellow"},{"text":" %provider%","color":"light_purple"},{"text":"\naka ","color":"aqua"},{"text":"%org%","color":"gold","bold":"true"},{"text":"\nProxy: ","color":"aqua"},{"text":"%proxy%","color":"%proxyColor%","bold":"true"},{"text":" (%type%)","color":"light_purple"},{"text":"\n\nJoin our Discord server:\n","color":"green"},{"text":"https://discord.gg/UzEfm7e","bold":true,"color":"green"}]},
+  "proxyColor": "red",
+  "notProxyColor": "green"
+}
