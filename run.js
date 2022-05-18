@@ -3,23 +3,30 @@ const mc = require('minecraft-protocol');
 const dotenv = require('dotenv');
 
 dotenv.config();
-console.log(process.env);
 
 const pcKey = process.env["PROXYCHECK_KEY"];
 const pcEndpoint = 'https://proxycheck.io/v2/';
 const pcArgs = '?vpn=1&asn=1';
 
+var host = process.env["SERVER_HOST"];
+host = (host == undefined ? '0.0.0.0' : host)
+var port = process.env["SERVER_PORT"];
+port = (port == undefined ? '25565' : port)
+
+console.log(`Starting server on ${host}:${port}`);
+
 var server = mc.createServer({
-	  host: process.env["SERVER_HOST"],
-	  port: process.env["SERVER_PORT"],
-	  version: '1.8.9',
-	  'online-mode': false,
-      maxPlayers: 1,
-	  beforePing: beforePing,
-	  beforeLogin: beforeLogin
+  host: host,
+  port: port,
+  version: '1.8.9',
+  'online-mode': false,
+  maxPlayers: 1,
+  beforePing: beforePing,
+  beforeLogin: beforeLogin
 });
 
 function beforePing(resp, client) {
+  console.log(client.socket)
   console.log("Ping: " + client.socket.remoteAddress);
   var ip = client.socket.remoteAddress;
   var parts = ip.split('.');
@@ -46,10 +53,11 @@ function beforeLogin(client) {
   var ip = client.socket.remoteAddress;
   var url = pcEndpoint + ip + pcArgs;
   tiny.get({url}, function _get(err, result) {
-    var status = result.body[status];
-    if (status == "denied") {
+    var status = result.body["status"];
+    if (status == "denied" || status == "error") {
       console.log('API returned an error: ');
-      console.log(status["message"]);
+      console.log(result.body["message"]);
+      client.end('err', 'API error')
       return;
     }
     var response = result.body[ip];
