@@ -17,7 +17,11 @@ port = (port == undefined ? '25565' : port);
 var debug = process.env["DEBUG"];
 debug = (debug == undefined ? false : (debug == 'true' ? true : false));
 var messagesJson = process.env["MESSAGES_JSON"];
-messagesJson = (messagesJson == undefined ? "./messages.json" : messagesJson)
+messagesJson = (messagesJson == undefined ? "./messages.json" : messagesJson);
+var logConn = process.env["LOG_CONNECTIONS"];
+logConn = (logConn == undefined ? true : (logConn == 'true' ? true : false));
+var logPing = process.env["LOG_PINGS"];
+logPing = (logPing == undefined ? false : (logPing == 'true' ? true : false));
 
 const messages = require(messagesJson);
 const motd = JSON.stringify(messages["motd"]);
@@ -46,7 +50,7 @@ function beforePing(resp, client) {
   if (debug) console.log(client.socket)
   const ip = client.socket.remoteAddress;
   if (ip == undefined) return;
-  console.log("Ping: " + ip);
+  if (logPing) console.log("Ping: " + ip);
   const parts = ip.split('.');
   const ip0 = parts[0];
   const ip1 = parts[1];
@@ -64,7 +68,7 @@ function beforeLogin(client) {
   if (debug) console.log(client.socket)
   const ip = client.socket.remoteAddress;
   if (ip == undefined) return;
-  console.log("Conn: " + ip);
+  if (logConn) console.log("Conn: " + ip);
   const url = pcEndpoint + ip + pcArgs + '?key=' + pcKey;
   tiny.get({url}, function _get(err, result) {
     if (debug) console.log(result.body);
