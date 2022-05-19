@@ -8,7 +8,7 @@ dotenv.config();
 
 const pcKey = process.env["PROXYCHECK_KEY"];
 const pcEndpoint = 'https://proxycheck.io/v2/';
-const pcArgs = '?vpn=1&asn=1';
+const pcArgs = '?vpn=1&asn=1' + (pcKey != undefined ? "&key=" + pcKey : '');
 
 var host = process.env["SERVER_HOST"];
 host = (host == undefined ? '0.0.0.0' : host);
@@ -34,6 +34,7 @@ if (debug) {
     console.log(messages);
 }
 
+if (pcKey == undefined) console.log("ProxyCheck.io API key is not set! You may suffer from a daily request limit.");
 console.log(`Starting the server...`);
 
 var server = mc.createServer({
@@ -69,7 +70,7 @@ function beforeLogin(client) {
   const ip = client.socket.remoteAddress;
   if (ip == undefined) return;
   if (logConn) console.log("Conn: " + ip);
-  const url = pcEndpoint + ip + pcArgs + '?key=' + pcKey;
+  const url = pcEndpoint + ip + pcArgs;
   tiny.get({url}, function _get(err, result) {
     if (debug) console.log(result.body);
     const status = result.body["status"];
