@@ -10,6 +10,7 @@ Features:
 Setup:
 1. Download and install [Node](https://nodejs.org)
 2. Install the dependencies: `npm i`
-3. Create an `.env` file and configure as needed (see `.env.example`)
-4. Customize `messages.json` if you want to
-5. Start it: `node run.js`
+3. Optionally, create a proxycheck.io account and create an api key
+4. Create an `.env` file and configure as needed (see `.env.example`)
+5. Customize `messages.json` if you want to
+6. Start it: `node run.js`
