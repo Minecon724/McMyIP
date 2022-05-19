@@ -30,7 +30,7 @@ if (debug) {
     console.log(messages);
 }
 
-console.log(`Starting server on ${host}:${port}`);
+console.log(`Starting the server...`);
 
 var server = mc.createServer({
   host: host,
@@ -98,3 +98,7 @@ function beforeLogin(client) {
     );
   });
 }
+
+server.once('listening', () => {
+  console.log(`Server listening on ${host}:${port}`);
+});
