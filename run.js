@@ -65,7 +65,7 @@ function beforeLogin(client) {
   const ip = client.socket.remoteAddress;
   if (ip == undefined) return;
   console.log("Conn: " + ip);
-  const url = pcEndpoint + ip + pcArgs;
+  const url = pcEndpoint + ip + pcArgs + '?key=' + pcKey;
   tiny.get({url}, function _get(err, result) {
     if (debug) console.log(result.body);
     const status = result.body["status"];
