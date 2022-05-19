@@ -3,9 +3,9 @@ Test here: `myip.pivipi.net`
 
 Features:
 - lightweight (~50MB memory & <1% cpu on idle)
-- fast (ready in <1s)
+- fast (ready for connections in <1s)
 - easy to configure and use
-- everything is 
+- heavily customizable
 
 Setup:
 1. Download and install [Node](https://nodejs.org)
