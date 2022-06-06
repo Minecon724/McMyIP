@@ -4,6 +4,7 @@ Test here: `myip.pivipi.net`
 Features:
 - lightweight (~50MB memory & <1% cpu on idle)
 - fast (ready for connections in <1s)
+- 1.7.10 - 1.18.2
 - easy to configure and use
 - heavily customizable
 
